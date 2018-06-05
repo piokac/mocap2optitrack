@@ -98,6 +98,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_joints">
+        <property name="text">
+         <string>Węzły:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label_pose">
         <property name="text">
          <string>Pozycja:</string>
