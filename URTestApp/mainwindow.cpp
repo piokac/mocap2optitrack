@@ -6,10 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    UR3Intermediator_ = new UR3Intermediator("127.0.0.1",30002);
+    UR3Intermediator_ = new UR3Intermediator("192.168.0.108",30002);
 
 
     connect(UR3Intermediator_, SIGNAL(robotEmergancyStoped()), this, SLOT(onRobotEmergancyStopped()));
+    connect(UR3Intermediator_, SIGNAL(ConnectionAction(QString,bool)), this, SLOT(onRobotConnected()));
     connect(UR3Intermediator_, SIGNAL(DisconnectionAction()), this, SLOT(onRobotDisconnect()));
     connect(UR3Intermediator_, SIGNAL(CommandExecutionStart()), this, SLOT(robotStarted()));
     connect(UR3Intermediator_, SIGNAL(CommandFinished()), this, SLOT(robotFinished()));
@@ -61,13 +62,25 @@ void MainWindow::robotStarted()
 
 void MainWindow::robotFinished()
 {
-   ui->r_state->setText("COMMAND FINISHED");
+    ui->r_state->setText("COMMAND FINISHED");
 }
 
 
 void MainWindow::newPoseFromRobot(QVector<double> data, char type)
 {
-    QString str = QString("x:%1; y:%2; z:%3").arg(data[0],data[1],data[2]);
+    switch(type)
+    {
+    case 'j':{ //joint coordinates
+        QString str = QString("Kąty w węzłach:q0:%1; q1:%2; q2:%3; q3:%4; q4:%5; q5:%6").arg(data[0],0,'g',2).arg(data[1],0,'g',2).arg(data[2],0,'g',2).arg(data[3],0,'g',2).arg(data[4],0,'g',2).arg(data[5],0,'g',2);
+        ui->label_joints->setText(str);
+    }
+        break;
+    case 'p':{ //TCP coordinates
+        QString str = QString("Pozycja TCP: x:%1; y:%2; z:%3; Rx:%4;Ry:%5;Rz:%6").arg(data[0],0,'g',4).arg(data[1],0,'g',4).arg(data[2],0,'g',4).arg(data[3],0,'g',4).arg(data[4],0,'g',4).arg(data[5],0,'g',4);
+        ui->label_pose->setText(str);
+    }
+        break;
+    }
 }
 
 
