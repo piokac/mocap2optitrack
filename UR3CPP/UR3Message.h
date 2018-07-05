@@ -200,6 +200,7 @@ public:
     float getActualMotorTemprature() const;
     void setActualMotorTemprature(float value);
     JointMode getJointMode() const;
+
     void setJointMode(const JointMode &value);
 };
 
