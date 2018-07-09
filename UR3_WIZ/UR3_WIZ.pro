@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-07-02T18:18:55
+# Project created by QtCreator 2018-07-09T20:30:38
 #
 #-------------------------------------------------
 
@@ -11,24 +11,21 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = UR3_WIZ
 TEMPLATE = app
 
-# The following define makes your compiler emit warnings if you use
-# any feature of Qt which has been marked as deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
+include(../UR3CPP/UR3CPP.pri)
+
 DEFINES += QT_DEPRECATED_WARNINGS
 
-# You can also make your code fail to compile if you use deprecated APIs.
-# In order to do so, uncomment the following line.
-# You can also select to disable deprecated APIs only up to a certain version of Qt.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        ur3wiz.cpp \
+    connectdialog.cpp
 
 HEADERS += \
-        mainwindow.h
+        ur3wiz.h \
+    connectdialog.h
 
 FORMS += \
-        mainwindow.ui
+        ur3wiz.ui \
+    connectdialog.ui

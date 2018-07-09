@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    UR3Intermediator_ = new UR3Intermediator("192.168.0.108",30002);
+    UR3Intermediator_ = new UR3Intermediator("10.0.2.15",30002);
 
 
     connect(UR3Intermediator_, SIGNAL(robotEmergancyStoped()), this, SLOT(onRobotEmergancyStopped()));
